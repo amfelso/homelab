@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Get a node's IP given node ID
 NODE_ID=$1

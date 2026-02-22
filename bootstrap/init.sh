@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Load environment, set globals
 set +a && source /tmp/.env
