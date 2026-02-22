@@ -1,6 +1,6 @@
 # Homelab
 
-This repo contains scripts, configs, and environment files for a Raspberry Pi K3s homelab.
+This repo contains automation scripts, application code, and Kubernetes manifests for a Raspberry Pi K3s homelab.
 
 ## Prerequisites
 
