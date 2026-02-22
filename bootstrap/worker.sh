@@ -13,4 +13,4 @@ else
     echo "Memory cgroups already enabled, continuing..."
 fi
 
-curl -sfL https://get.k3s.io | K3S_URL=https://192.168.0.45:6443 K3S_TOKEN=$NODE_TOKEN sh -
+curl -sfL https://get.k3s.io | K3S_URL=$NODE_URL K3S_TOKEN=$NODE_TOKEN sh -s

@@ -1,0 +1,5 @@
+#!/bin/bash
+# Activate virtual homelab environment
+
+set -a && source .env && VIRTUAL_ENV=$(pwd)/venv && set +a;
+echo "Virtual env activated: $VIRTUAL_ENV";

@@ -7,11 +7,11 @@ This repo contains scripts, configs, and environment files for my Raspberry Pi K
 1. Load environment variables:
 
 ```bash
-source .env
+source venv/activate
 ```
 
 2. SSH into a Pi node:
 
 ```bash
-ssh -i "$SSH_KEY" $USER@$NODE_MASTER
+make ssh node=1
 ```
