@@ -1,10 +1,24 @@
+# Bootstrap a node
+.PHONY: bootstrap
+bootstrap:
+	@NODE_IP=$$(./scripts/get-node-ip.sh ${node}); \
+	BOOTSTRAP_SCRIPT="bootstrap/init.sh" && source venv/activate > /dev/null; \
+	echo "Bootstrapping node $$NODE_ID at $$NODE_IP using $$BOOTSTRAP_SCRIPT..."; \
+	scp -i $$SSH_KEY .env $$ADMIN_USER@$$NODE_IP:/tmp/.env > /dev/null; \
+	scp -i $$SSH_KEY "$$BOOTSTRAP_SCRIPT" $$ADMIN_USER@$$NODE_IP:/tmp/bootstrap.sh > /dev/null; \
+	ssh -i $$SSH_KEY $$ADMIN_USER@$$NODE_IP "chmod +x /tmp/bootstrap.sh && source /tmp/.env && /tmp/bootstrap.sh && rm -f /tmp/bootstrap.sh"; \
+	if [ "$$NODE_IP" = "$$NODE_01" ]; then \
+		scp -i $$SSH_KEY $$ADMIN_USER@$$NODE_IP:/tmp/.env .env > /dev/null; \
+		scp -i $$SSH_KEY $$ADMIN_USER@$$NODE_IP:/tmp/cluster.yaml $$KUBECONFIG > /dev/null; \
+		ssh -i $$SSH_KEY $$ADMIN_USER@$$NODE_IP "rm -f /tmp/.env /tmp/cluster.yaml"; \
+	else \
+		ssh -i $$SSH_KEY $$ADMIN_USER@$$NODE_IP "rm -f /tmp/.env"; \
+	fi; \
+
 # SSH into a node
 .PHONY: ssh
 ssh:
-	@NODE_ID=${node}; \
-	if [ -z "$$NODE_ID" ]; then \
-		echo "Node ID not set. Example: make ssh node=1"; exit 1; \
-	fi; \
-	source venv/activate > /dev/null && NODE_VAR="NODE_0$$NODE_ID" && NODE_IP=$${!NODE_VAR}; \
+	@NODE_IP=$$(./scripts/get-node-ip.sh ${node}); \
+	source venv/activate > /dev/null; \
 	echo "Connecting to node $$NODE_VAR at $$NODE_IP..."; \
 	ssh -i "$$SSH_KEY" "$$ADMIN_USER@$$NODE_IP";
