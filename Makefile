@@ -1,3 +1,7 @@
+# Variables
+IMAGE = ghcr.io/amfelso/pi-agent
+TAG = local
+
 # Infrastructure targets
 .PHONY: bootstrap
 bootstrap:
@@ -36,3 +40,7 @@ lint:
 .PHONY: test-unit
 test-unit:
 	@cd app && go test ./...
+
+.PHONY: build
+build:
+	@docker build -f docker/Dockerfile app/ -t $(IMAGE):$(TAG)
