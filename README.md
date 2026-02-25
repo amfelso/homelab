@@ -1,5 +1,8 @@
 # Homelab
 
+[![.github/workflows/develop.yaml](https://github.com/amfelso/homelab/actions/workflows/develop.yaml/badge.svg)](https://github.com/amfelso/homelab/actions/workflows/develop.yaml)
+[![.github/workflows/main.yaml](https://github.com/amfelso/homelab/actions/workflows/main.yaml/badge.svg?branch=main)](https://github.com/amfelso/homelab/actions/workflows/main.yaml)
+
 This repo contains automation scripts, application code, and Kubernetes manifests for a Raspberry Pi K3s homelab.
 
 ## Prerequisites
