@@ -1,0 +1,6 @@
+schedule: "*/5 * * * *"
+
+image:
+  repository: ghcr.io/amfelso/homelab
+  tag: latest
+  pullPolicy: IfNotPresent
