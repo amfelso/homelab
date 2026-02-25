@@ -1,4 +1,4 @@
-# Bootstrap a node
+# Infrastructure targets
 .PHONY: bootstrap
 bootstrap:
 	@NODE_IP=$$(./scripts/get-node-ip.sh ${node}); \
@@ -15,10 +15,24 @@ bootstrap:
 		ssh -i $$SSH_KEY $$ADMIN_USER@$$NODE_IP "rm -f /tmp/.env"; \
 	fi; \
 
-# SSH into a node
 .PHONY: ssh
 ssh:
 	@NODE_IP=$$(./scripts/get-node-ip.sh ${node}); \
 	source venv/activate > /dev/null; \
 	echo "Connecting to node $$NODE_VAR at $$NODE_IP..."; \
 	ssh -i "$$SSH_KEY" "$$ADMIN_USER@$$NODE_IP";
+
+# Application targets
+.PHONY: install-tools
+install-tools:
+	brew install golangci-lint hadolint helm
+
+.PHONY: lint
+lint:
+	@cd app && golangci-lint run ./...
+	@helm lint helm/pi-agent
+	@hadolint docker/Dockerfile
+
+.PHONY: test-unit
+test-unit:
+	@cd app && go test ./...
