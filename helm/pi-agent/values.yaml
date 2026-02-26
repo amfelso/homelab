@@ -1,6 +1,6 @@
 schedule: "*/5 * * * *"
 
 image:
-  repository: ghcr.io/amfelso/homelab
+  repository: ghcr.io/amfelso/pi-agent
   tag: latest
   pullPolicy: IfNotPresent
