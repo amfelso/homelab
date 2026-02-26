@@ -35,7 +35,7 @@ lint:
 
 .PHONY: test-unit
 test-unit:
-	@cd app && go test ./...;
+	@cd app && go test ./... -cover;
 
 .PHONY: deploy
 deploy:
