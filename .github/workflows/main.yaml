@@ -12,6 +12,8 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
+      - name: Set short SHA
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - name: Login to GHCR
         uses: docker/login-action@v3
         with:
@@ -25,7 +27,7 @@ jobs:
           file: docker/Dockerfile
           push: true
           tags: |
-            ghcr.io/amfelso/pi-agent:${{ github.sha }}
+            ghcr.io/amfelso/pi-agent:${{ env.SHORT_SHA }}
             ghcr.io/amfelso/pi-agent:latest
           platforms: linux/arm64
 
