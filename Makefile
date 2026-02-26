@@ -25,14 +25,20 @@ ssh:
 # Application targets
 .PHONY: install-tools
 install-tools:
-	brew install golangci-lint hadolint helm
+	brew install golangci-lint hadolint helm;
 
 .PHONY: lint
 lint:
-	@cd app && golangci-lint run ./...
-	@helm lint helm/pi-agent
-	@hadolint docker/Dockerfile
+	@cd app && golangci-lint run ./...;
+	@helm lint helm/pi-agent;
+	@hadolint docker/Dockerfile;
 
 .PHONY: test-unit
 test-unit:
-	@cd app && go test ./...
+	@cd app && go test ./...;
+
+.PHONY: deploy
+deploy:
+	@source venv/activate > /dev/null; \
+	helm upgrade --install pi-agent helm/pi-agent \
+        --set image.tag=$(shell git rev-parse --short origin/main);
