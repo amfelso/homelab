@@ -4,6 +4,6 @@ WORKDIR /app
 COPY . .
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -o pi-agent .
 
-FROM alpine:3.21
+FROM scratch
 COPY --from=builder /app/pi-agent /pi-agent
 ENTRYPOINT ["/pi-agent"]

@@ -37,9 +37,17 @@ lint:
 test-unit:
 	@cd app && go test ./... -cover;
 
+.PHONY: preview
+preview:
+	@helm template ./helm/pi-agent
+
 .PHONY: deploy
 deploy:
 	@source venv/activate > /dev/null; \
 	git fetch origin main --quiet; \
+	IMAGE_TAG=$$(git rev-parse --short origin/main); \
+	echo "Deploying image tag: $$IMAGE_TAG"; \
 	helm upgrade --install pi-agent helm/pi-agent \
-        --set image.tag=$(shell git rev-parse --short origin/main);
+        --set image.tag=$$IMAGE_TAG \
+		--namespace=pi-agent \
+        --create-namespace; 
