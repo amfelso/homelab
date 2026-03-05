@@ -18,3 +18,14 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+          - name: sysfs
+            mountPath: /host/sys
+            readOnly: true
+      tolerations:
+      # Run on all nodes including control plane
+      - operator: Exists
+      volumes:
+      - name: sysfs
+        hostPath:
+          path: /sys
