@@ -1,0 +1,20 @@
+# Metric collector template
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Values.collector.name }}
+  namespace: {{ .Release.namespace }}
+  labels: {{- include "pi-agent.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "pi-agent.collector.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "pi-agent.collector.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}

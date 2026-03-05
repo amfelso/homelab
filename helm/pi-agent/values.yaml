@@ -1,6 +1,17 @@
-schedule: "*/5 * * * *"
-
+# Image configuration
 image:
   repository: ghcr.io/amfelso/pi-agent
   tag: latest
   pullPolicy: IfNotPresent
+
+# Metric collector configuration
+collector:
+  name: metric-collector
+  schedule: 300 # Default collection interval = every 5 minutes
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
