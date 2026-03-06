@@ -45,10 +45,8 @@ preview:
 .PHONY: deploy
 deploy:
 	@source venv/activate > /dev/null; \
-	git fetch origin main --quiet; \
-	IMAGE_TAG=$$(git rev-parse --short origin/main); \
-	echo "Deploying image tag: $$IMAGE_TAG"; \
+	echo "Deploying image tag: latest"; \
 	helm upgrade --install pi-agent helm/pi-agent \
-        --set image.tag=$$IMAGE_TAG \
+        --set image.tag=latest \
 		--namespace=pi-agent \
-        --create-namespace; 
+        --create-namespace;
