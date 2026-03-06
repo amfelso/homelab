@@ -11,6 +11,11 @@ import (
 type Cpu struct{
 	prevIdle  uint64
     prevTotal uint64
+	fileName string
+}
+
+func NewCpu(path string) *Cpu {
+	return &Cpu{fileName: path}
 }
  
 func (c *Cpu)Name() string {
@@ -18,10 +23,8 @@ func (c *Cpu)Name() string {
 }
 
 func (c *Cpu)Collect() (float64, error) {
-	fileName := "/host/proc/stat"
-
 	// Open the file
-	file, err := os.Open(fileName)
+	file, err := os.Open(c.fileName)
 	if err != nil {
 		log.Printf("Error opening file: %s", err)
 		return 0.0, err 

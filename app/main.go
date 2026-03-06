@@ -16,7 +16,7 @@ func main() {
 	flag.Parse()
 	log.Printf("Seconds: %d\n", seconds)
 
-	metrics := []collectors.Collector{&collectors.Cpu{}}
+	metrics := []collectors.Collector{collectors.NewCpu("/host/proc/start")}
 
 	ticker := time.NewTicker(time.Duration(seconds) * time.Second)
 	for range ticker.C {
