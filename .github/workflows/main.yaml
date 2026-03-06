@@ -26,7 +26,17 @@ jobs:
           context: app
           file: docker/Dockerfile
           push: true
-          tags: |
-            ghcr.io/amfelso/pi-agent:${{ env.SHORT_SHA }}
-            ghcr.io/amfelso/pi-agent:latest
+          tags: ghcr.io/amfelso/pi-agent:${{ env.SHORT_SHA }}
           platforms: linux/arm64
+      - name: Scan image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ghcr.io/amfelso/pi-agent:${{ env.SHORT_SHA }}
+          format: table
+          exit-code: 1
+          severity: CRITICAL,HIGH
+      - name: Tag as latest
+        run: |
+          docker buildx imagetools create \
+            -t ghcr.io/amfelso/pi-agent:latest \
+            ghcr.io/amfelso/pi-agent:${{ env.SHORT_SHA }}
