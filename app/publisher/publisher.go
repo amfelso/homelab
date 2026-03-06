@@ -37,7 +37,7 @@ func NewPublisher(brokerURL, nodeName, caPath, username, password string) (*Publ
 }
 
 func (p *Publisher) Publish(metric string, value float64) error {
-	payload := fmt.Sprintf("%.2f", value)
+	payload := fmt.Sprintf("%.1f", value)
 	token := p.client.Publish(fmt.Sprintf("homelab/%s/%s", p.nodeName, metric), 0, false, payload)
 	if token.Wait() && token.Error() != nil {
 		return token.Error()
