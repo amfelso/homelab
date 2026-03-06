@@ -22,6 +22,9 @@ spec:
           - name: sysfs
             mountPath: /host/sys
             readOnly: true
+          - name: procfs
+            mountPath: /host/proc
+            readOnly: true
       tolerations:
       # Run on all nodes including control plane
       - operator: Exists
@@ -29,3 +32,6 @@ spec:
       - name: sysfs
         hostPath:
           path: /sys
+      - name: procfs
+        hostPath:
+          path: /proc
