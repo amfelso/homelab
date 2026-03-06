@@ -28,6 +28,9 @@ spec:
           - name: procfs
             mountPath: /host/proc
             readOnly: true
+          - name: rootfs
+            mountPath: /host/root
+            readOnly: true
       tolerations:
       # Run on all nodes including control plane
       - operator: Exists
@@ -38,3 +41,6 @@ spec:
       - name: procfs
         hostPath:
           path: /proc
+      - name: rootfs
+        hostPath:
+          path: /
