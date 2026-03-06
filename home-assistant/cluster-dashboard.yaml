@@ -1,0 +1,67 @@
+type: grid
+cards:
+  - type: heading
+    heading_style: title
+    heading: Kubernetes Cluster Stats
+    icon: mdi:robot-happy
+  - type: entities
+    entities:
+      - entity: sensor.node_01_cpu_usage
+        icon: mdi:cpu-64-bit
+        name: CPU Usage
+      - entity: sensor.node_01_temperature
+        icon: mdi:thermometer
+        name: CPU Temperature
+      - entity: sensor.node_01_memory_usage
+        name: Memory Usage
+        icon: mdi:memory
+      - entity: sensor.node_01_disk_usage
+        name: Disk Usage
+        icon: mdi:harddisk
+    state_color: false
+    show_header_toggle: false
+    grid_options:
+      columns: 6
+      rows: 5
+    title: node-01
+  - type: entities
+    entities:
+      - entity: sensor.node_03_cpu_usage
+        icon: mdi:cpu-64-bit
+        name: CPU Usage
+      - entity: sensor.node_03_temperature
+        icon: mdi:thermometer
+        name: CPU Temperature
+      - entity: sensor.node_03_memory_usage
+        name: Memory Usage
+        icon: mdi:memory
+      - entity: sensor.node_03_disk_usage
+        name: Disk Usage
+        icon: mdi:harddisk
+    title: node-03
+    state_color: false
+    show_header_toggle: false
+    grid_options:
+      columns: 6
+      rows: 5
+  - type: entities
+    entities:
+      - entity: sensor.node_04_cpu_usage
+        icon: mdi:cpu-64-bit
+        name: CPU Usage
+      - entity: sensor.node_04_temperature
+        icon: mdi:thermometer
+        name: CPU Temperature
+      - entity: sensor.node_04_memory_usage
+        name: Memory Usage
+        icon: mdi:memory
+      - entity: sensor.node_04_disk_usage
+        name: Disk Usage
+        icon: mdi:harddisk
+    title: node-04
+    state_color: false
+    show_header_toggle: false
+    grid_options:
+      columns: 6
+      rows: 5
+column_span: 2

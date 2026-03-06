@@ -1,0 +1,64 @@
+mqtt:
+  sensor:
+    # node-01
+    - name: "Node 01 CPU Usage"
+      state_topic: "homelab/node-01/cpu"
+      unit_of_measurement: "%"
+      value_template: "{{ value }}"
+
+    - name: "Node 01 Memory Usage"
+      state_topic: "homelab/node-01/memory"
+      unit_of_measurement: "%"
+      value_template: "{{ value }}"
+
+    - name: "Node 01 Temperature"
+      state_topic: "homelab/node-01/temp"
+      unit_of_measurement: "°F"
+      value_template: "{{ value }}"
+
+    - name: "Node 01 Disk Usage"
+      state_topic: "homelab/node-01/disk"
+      unit_of_measurement: "%"
+      value_template: "{{ value }}"
+
+    # node-03
+    - name: "Node 03 CPU Usage"
+      state_topic: "homelab/node-03/cpu"
+      unit_of_measurement: "%"
+      value_template: "{{ value }}"
+
+    - name: "Node 03 Memory Usage"
+      state_topic: "homelab/node-03/memory"
+      unit_of_measurement: "%"
+      value_template: "{{ value }}"
+
+    - name: "Node 03 Temperature"
+      state_topic: "homelab/node-03/temp"
+      unit_of_measurement: "°F"
+      value_template: "{{ value }}"
+
+    - name: "Node 03 Disk Usage"
+      state_topic: "homelab/node-03/disk"
+      unit_of_measurement: "%"
+      value_template: "{{ value }}"
+
+    # node-04
+    - name: "Node 04 CPU Usage"
+      state_topic: "homelab/node-04/cpu"
+      unit_of_measurement: "%"
+      value_template: "{{ value }}"
+
+    - name: "Node 04 Memory Usage"
+      state_topic: "homelab/node-04/memory"
+      unit_of_measurement: "%"
+      value_template: "{{ value }}"
+
+    - name: "Node 04 Temperature"
+      state_topic: "homelab/node-04/temp"
+      unit_of_measurement: "°F"
+      value_template: "{{ value }}"
+
+    - name: "Node 04 Disk Usage"
+      state_topic: "homelab/node-04/disk"
+      unit_of_measurement: "%"
+      value_template: "{{ value }}"
