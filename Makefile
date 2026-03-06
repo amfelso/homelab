@@ -42,11 +42,22 @@ test-unit:
 preview:
 	@helm template ./helm/pi-agent
 
-.PHONY: deploy
-deploy:
+.PHONY: secret
+secret:
 	@source venv/activate > /dev/null; \
-	echo "Deploying image tag: latest"; \
+	kubectl create secret generic mqtt-credentials \
+		--namespace pi-agent \
+		--from-literal=MQTT_USERNAME=$$MQTT_USERNAME \
+		--from-literal=MQTT_PASSWORD=$$MQTT_PASSWORD \
+		--from-literal=MQTT_BROKER_URL=$$MQTT_BROKER_URL \
+		--dry-run=client -o yaml | kubectl apply -f -
+
+.PHONY: deploy
+deploy: secret
+	@source venv/activate > /dev/null; \
+	IMAGE_TAG=$${tag:-latest}; \
+	echo "Deploying image tag: $$IMAGE_TAG"; \
 	helm upgrade --install pi-agent helm/pi-agent \
-        --set image.tag=latest \
+        --set image.tag=$$IMAGE_TAG \
 		--namespace=pi-agent \
         --create-namespace;
