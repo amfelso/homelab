@@ -12,7 +12,7 @@ type Publisher struct {
 }
 
 func NewPublisher(brokerURL, nodeName, username, password string) (*Publisher, error) {
-    opts := mqtt.NewClientOptions()
+	opts := mqtt.NewClientOptions()
 	opts.AddBroker(brokerURL)
 	opts.SetClientID(nodeName)
 	opts.SetUsername(username)
@@ -26,10 +26,10 @@ func NewPublisher(brokerURL, nodeName, username, password string) (*Publisher, e
 }
 
 func (p *Publisher) Publish(metric string, value float64) error {
-    payload := fmt.Sprintf("%.2f", value)
-    token := p.client.Publish(fmt.Sprintf("homelab/%s/%s", p.nodeName, metric), 0, false, payload)
-    if token.Wait() && token.Error() != nil {
-	    return token.Error()
-    }
-    return nil
+	payload := fmt.Sprintf("%.2f", value)
+	token := p.client.Publish(fmt.Sprintf("homelab/%s/%s", p.nodeName, metric), 0, false, payload)
+	if token.Wait() && token.Error() != nil {
+		return token.Error()
+	}
+	return nil
 }
