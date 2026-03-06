@@ -2,6 +2,7 @@ package collectors
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -35,12 +36,11 @@ func (c *Cpu)Collect() (float64, error) {
 
 	// Create a new Scanner for the file
 	scanner := bufio.NewScanner(file)
-	scanner.Scan()
-	
-	// Check for any errors encountered during scanning
-	if err := scanner.Err(); err != nil {
-		log.Printf("Error during scanning: %s", err)
-		return 0.0, err 
+	if !scanner.Scan() {
+		if err := scanner.Err(); err != nil {
+			return 0.0, err
+		}
+		return 0.0, fmt.Errorf("unexpected EOF in %s", c.fileName)
 	}
 
 	stats := strings.Fields(scanner.Text())[1:]
