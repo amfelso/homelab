@@ -17,7 +17,8 @@ func main() {
 	log.Printf("Schedule: %d seconds\n", schedule)
 
 	metrics := []collectors.Collector{collectors.NewCpu("/host/proc/stat"), collectors.NewMemory("/host/proc/meminfo"),
-									  collectors.NewTemperature("/host/sys/class/thermal/thermal_zone0/temp")}
+		collectors.NewTemperature("/host/sys/class/thermal/thermal_zone0/temp"),
+		collectors.NewDisk("/host/root/")}
 
 	ticker := time.NewTicker(time.Duration(schedule) * time.Second)
 	for range ticker.C {
