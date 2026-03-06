@@ -29,7 +29,7 @@ func main() {
 	metrics := []collectors.Collector{collectors.NewCpu("/host/proc/stat"), collectors.NewMemory("/host/proc/meminfo"),
 		collectors.NewTemperature("/host/sys/class/thermal/thermal_zone0/temp"),
 		collectors.NewDisk("/host/root/")}
-	p, err := publisher.NewPublisher(mqttBroker, nodeName, mqttUser, mqttPwd)
+	p, err := publisher.NewPublisher(mqttBroker, nodeName, "/ca.crt", mqttUser, mqttPwd)
 	if err != nil {
 		log.Fatalf("Couldn't connect to publisher: %s\n", err)
 	}
