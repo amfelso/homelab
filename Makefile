@@ -29,6 +29,7 @@ install-tools:
 
 .PHONY: lint
 lint:
+	@if [ -n "$$(cd app && gofmt -l .)" ]; then echo "gofmt: run 'gofmt -w app/'"; exit 1; fi
 	@cd app && golangci-lint run ./...;
 	@helm lint helm/pi-agent;
 	@hadolint docker/Dockerfile;
