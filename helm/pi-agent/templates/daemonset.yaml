@@ -18,6 +18,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - "--schedule"
+            - "{{ .Values.collector.schedule }}"
           volumeMounts:
           - name: sysfs
             mountPath: /host/sys
