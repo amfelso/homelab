@@ -16,7 +16,7 @@ func NewTemperature(path string) *Temperature {
 }
 
 func (t *Temperature) Name() string {
-	return "temp_f"
+	return "temp"
 }
 
 func (t *Temperature) Collect() (float64, error) {

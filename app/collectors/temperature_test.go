@@ -23,8 +23,8 @@ func writeTempInfo(t *testing.T, content string) string {
 
 func TestTempName(t *testing.T) {
 	tp := &Temperature{}
-	if tp.Name() != "temp_f" {
-		t.Errorf("expected name 'temp_f', got %s", tp.Name())
+	if tp.Name() != "temp" {
+		t.Errorf("expected name 'temp', got %s", tp.Name())
 	}
 }
 
