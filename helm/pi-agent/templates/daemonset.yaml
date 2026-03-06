@@ -26,6 +26,21 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
+          - name: MQTT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mqtt-credentials
+                key: MQTT_USERNAME
+          - name: MQTT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mqtt-credentials
+                key: MQTT_PASSWORD
+          - name: MQTT_BROKER_URL
+            valueFrom:
+              secretKeyRef:
+                name: mqtt-credentials
+                key: MQTT_BROKER_URL
           volumeMounts:
           - name: sysfs
             mountPath: /host/sys
