@@ -30,7 +30,7 @@ func (m *Memory)Collect() (float64, error) {
 	}
 
 	// Ensure the file is closed the the function exits
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	// Create a new Scanner for the file
 	scanner := bufio.NewScanner(file)
