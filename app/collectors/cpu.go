@@ -9,26 +9,26 @@ import (
 	"strings"
 )
 
-type Cpu struct{
+type Cpu struct {
 	prevIdle  uint64
-    prevTotal uint64
-	fileName string
+	prevTotal uint64
+	fileName  string
 }
 
 func NewCpu(path string) *Cpu {
 	return &Cpu{fileName: path}
 }
- 
-func (c *Cpu)Name() string {
-    return "cpu"
+
+func (c *Cpu) Name() string {
+	return "cpu"
 }
 
-func (c *Cpu)Collect() (float64, error) {
+func (c *Cpu) Collect() (float64, error) {
 	// Open the file
 	file, err := os.Open(c.fileName)
 	if err != nil {
 		log.Printf("Error opening file: %s", err)
-		return 0.0, err 
+		return 0.0, err
 	}
 
 	// Ensure the file is closed the the function exits
@@ -52,17 +52,17 @@ func (c *Cpu)Collect() (float64, error) {
 	}
 
 	// Calculate idleDelta
-	idleDelta := currentIdle  - c.prevIdle
+	idleDelta := currentIdle - c.prevIdle
 
 	// calculate currentTotal
-    var currentTotal uint64
-    for _, stat := range stats {
+	var currentTotal uint64
+	for _, stat := range stats {
 		stat, err := strconv.ParseUint(stat, 10, 64)
 		if err != nil {
 			return 0.0, err
 		}
-        currentTotal += uint64(stat)
-    }
+		currentTotal += uint64(stat)
+	}
 
 	// values for first run
 	if c.prevTotal == 0 {
@@ -75,7 +75,7 @@ func (c *Cpu)Collect() (float64, error) {
 	totalDelta := currentTotal - c.prevTotal
 
 	// Usage Percent = (1 - idleDelta/totalDelta) * 100
-	usagePercent := (1.0 - float64(idleDelta)/float64(totalDelta))* 100
+	usagePercent := (1.0 - float64(idleDelta)/float64(totalDelta)) * 100
 
 	// Save current readings
 	c.prevIdle = currentIdle

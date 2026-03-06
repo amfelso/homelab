@@ -9,24 +9,24 @@ import (
 	"strings"
 )
 
-type Memory struct{
+type Memory struct {
 	fileName string
 }
 
 func NewMemory(path string) *Memory {
 	return &Memory{fileName: path}
 }
- 
-func (m *Memory)Name() string {
-    return "memory"
+
+func (m *Memory) Name() string {
+	return "memory"
 }
 
-func (m *Memory)Collect() (float64, error) {
+func (m *Memory) Collect() (float64, error) {
 	// Open the file
 	file, err := os.Open(m.fileName)
 	if err != nil {
 		log.Printf("Error opening file: %s", err)
-		return 0.0, err 
+		return 0.0, err
 	}
 
 	// Ensure the file is closed the the function exits
@@ -34,7 +34,7 @@ func (m *Memory)Collect() (float64, error) {
 
 	// Create a new Scanner for the file
 	scanner := bufio.NewScanner(file)
-	
+
 	// Get memTotal from line 0
 	if !scanner.Scan() {
 		if err := scanner.Err(); err != nil {
@@ -68,6 +68,6 @@ func (m *Memory)Collect() (float64, error) {
 	}
 
 	// Calculate usagePercent
-	usagePercent := float64(memTotal - memAvailable) / float64(memTotal) * 100
+	usagePercent := float64(memTotal-memAvailable) / float64(memTotal) * 100
 	return usagePercent, nil
 }

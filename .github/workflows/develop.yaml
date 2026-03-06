@@ -16,6 +16,12 @@ jobs:
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: docker/Dockerfile
+      - name: Check gofmt
+        run: |
+          if [ -n "$(cd app && gofmt -l .)" ]; then
+            echo "gofmt: run 'gofmt -w app/'"
+            exit 1
+          fi
       - uses: golangci/golangci-lint-action@v6
         with:
           working-directory: app
