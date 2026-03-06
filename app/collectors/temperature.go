@@ -7,26 +7,26 @@ import (
 	"strings"
 )
 
-type Temperature struct{
+type Temperature struct {
 	fileName string
 }
 
 func NewTemperature(path string) *Temperature {
 	return &Temperature{fileName: path}
 }
- 
-func (t *Temperature)Name() string {
-    return "temp_f"
+
+func (t *Temperature) Name() string {
+	return "temp_f"
 }
 
-func (t *Temperature)Collect() (float64, error) {
+func (t *Temperature) Collect() (float64, error) {
 	// Open the file
 	file, err := os.ReadFile(t.fileName)
 	if err != nil {
 		log.Printf("Error reading file: %s", err)
-		return 0.0, err 
+		return 0.0, err
 	}
-	
+
 	tempC, err := strconv.ParseInt(strings.TrimSpace(string(file)), 10, 64)
 	if err != nil {
 		return 0.0, err
